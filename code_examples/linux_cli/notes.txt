@@ -1,0 +1,12 @@
+This is my notes for linux
+Linux is an open-source OS
+It uses bash commands in a terminal (CLI) to navigate and interact with the OS
+
+nano is a simple text editor for bash
+vim is a more powerful, modal text editor with a steeper learning curve
+
+use 'i' to enter insert mode
+use ESC to exit your current mode
+use ':w' to write (save)
+use ':q' to quit vim
+use ':wq' to save and quit
