@@ -1,0 +1,30 @@
+// SQL equivalent:
+// SELECT * FROM employees;
+db.employees.find({});
+
+// SQL equivalent:
+// SELECT * FROM employees WHERE emp_title = 'Engineer';
+db.employees.find({ emp_title: "Engineer" });	// Keep in mind that String values are case-sensitive!
+
+// SQL equivalent:
+// SELECT * FROM employees WHERE emp_salary > 70000;
+db.employees.find({ emp_salary: { $gt: 70000 } });
+
+// SQL equivalent:
+// SELECT * FROM employees WHERE emp_title = 'Engineer' AND emp_salary > 70000;
+db.employees.find({
+  emp_title: "Engineer",
+  emp_salary: { $gt: 70000 }
+});
+
+// SQL equivalent:
+// SELECT emp_name, emp_title FROM employees;
+db.employees.find({}, { emp_name: 1, emp_title: 1, _id: 0 });
+
+// SQL equivalent:
+// SELECT * FROM employees ORDER BY emp_salary DESC;
+db.employees.find({}).sort({ emp_salary: -1 });
+
+// SQL equivalent:
+// SELECT * FROM employees WHERE emp_title IN ('Engineer', 'Manager');
+db.employees.find({ emp_title: { $in: ["Engineer", "Manager"] } });

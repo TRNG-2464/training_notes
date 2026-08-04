@@ -1,0 +1,24 @@
+// A validator can be used to ensure that documents, when added to a database
+// must match the schema, otherwise insertion of documents will be rejected.
+db.createCollection("employees", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["emp_name", "emp_salary", "emp_title"],
+      properties: {
+        emp_name: {
+          bsonType: "string",
+          description: "Employee Name - must be a string (mirrors VARCHAR datatype in SQL)"
+        },
+        emp_salary: {
+          bsonType: "number",
+          description: "Employee Salary - must be a numeric value (mirrors DECIMAL datatype in SQL)"
+        },
+        emp_title: {
+          bsonType: "string",
+          description: "Employee Title - must be a string"
+        }
+      }
+    }
+  }
+});

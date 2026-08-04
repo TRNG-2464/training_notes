@@ -1,0 +1,41 @@
+// SQL equivalent:
+// UPDATE employees SET emp_salary = 75000.00 WHERE emp_name = 'Joseph';
+db.employees.updateOne(
+  { emp_name: "Joseph" },
+  { $set: { emp_salary: 75000.00 } }
+);
+
+// SQL equivalent:
+// UPDATE employees SET emp_title = 'Senior Engineer' WHERE emp_title = 'Engineer';
+db.employees.updateMany(
+  { emp_title: "Engineer" },
+  { $set: { emp_title: "Senior Engineer" } }
+);
+
+// SQL equivalent (giving every employee a raise):
+// UPDATE employees SET emp_salary = emp_salary + 1000;
+db.employees.updateMany(
+  {},
+  { $inc: { emp_salary: 1000 } }
+);
+
+
+// SQL equivalent:
+// DELETE FROM employees WHERE emp_name = 'Joseph';
+db.employees.deleteOne({ emp_name: "Joseph" });
+
+// SQL equivalent:
+// DELETE FROM employees WHERE emp_title = 'Analyst';
+db.employees.deleteMany({ emp_title: "Analyst" });
+
+// SQL equivalent:
+// DELETE FROM employees;
+// (This removes all rows but leaves the table structure intact --
+// equivalent to deleteMany({}) below, NOT to DROP TABLE.)
+db.employees.deleteMany({});
+
+// SQL equivalent:
+// DROP TABLE employees;
+// (This removes the table structure entirely, not just its rows.)
+// Keep in mind - you cannot come back from this!
+db.employees.drop();

@@ -1,0 +1,19 @@
+// _id is omitted -- MongoDB generates it automatically (ObjectId).
+
+// SQL equivalent:
+// INSERT INTO employees (emp_name, emp_salary, emp_title)
+// VALUES ('Joseph', 72000.00, 'Engineer');
+db.employees.insertOne({
+  emp_name: "Joseph",
+  emp_salary: 72000.00,
+  emp_title: "Engineer"
+});
+
+// SQL equivalent for inserting multiple rows in one statement:
+// INSERT INTO employees (emp_name, emp_salary, emp_title)
+// VALUES ('Alex Smith', 65000.00, 'Analyst'),
+//        ('Sam Patel', 81000.00, 'Manager');
+db.employees.insertMany([
+  { emp_name: "Alex Smith", emp_salary: 65000.00, emp_title: "Analyst" },
+  { emp_name: "Betty Patel", emp_salary: 81000.00, emp_title: "Manager" }
+]);

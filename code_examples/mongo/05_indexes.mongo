@@ -1,0 +1,27 @@
+// SQL equivalent:
+// CREATE INDEX idx_emp_name ON employees (emp_name);
+db.employees.createIndex(
+  { emp_name: 1 },
+  { name: "idx_emp_name" }	// If you do not provide this name property, mongo automatically provides a name using the field name and the sorting order (i.e. emp_name_1)
+);
+
+// SQL equivalent:
+// CREATE UNIQUE INDEX idx_emp_name_unique ON employees (emp_name);
+db.employees.createIndex(
+  { emp_name: 1 },
+  { name: "idx_emp_name_unique", unique: true }
+);
+
+// SQL equivalent (a composite/compound index):
+// CREATE INDEX idx_title_salary ON employees (emp_title, emp_salary DESC);
+db.employees.createIndex(
+  { emp_title: 1, emp_salary: -1 },
+  { name: "idx_title_salary" }
+);
+
+// SQL equivalent:
+// DROP INDEX idx_emp_name ON employees;  -- (syntax varies by SQL dialect)
+db.employees.dropIndex("idx_emp_name");
+
+// Listing existing indexes -- SQL equivalent varies by SQL dialect:
+db.employees.getIndexes();
