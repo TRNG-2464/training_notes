@@ -1,6 +1,6 @@
 # MongoDB Atlas Setup Guide
 
-This guide walks through setting up a free MongoDB Atlas cluster — the recommended starting point for associates new to MongoDB. It's meant as a companion to Topic 4: MongoDB Setup in the training notes.
+This guide walks through setting up a free MongoDB Atlas cluster — the recommended starting point for associates new to MongoDB.
 
 > **Official documentation:** [Get Started with Atlas — MongoDB Docs](https://www.mongodb.com/docs/get-started/)
 > Additional reference: [Create a Cluster — MongoDB Atlas Docs](https://www.mongodb.com/docs/atlas/tutorial/create-new-cluster/)
