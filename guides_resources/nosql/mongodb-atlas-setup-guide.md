@@ -1,6 +1,6 @@
 # MongoDB Atlas Setup Guide
 
-This guide walks through setting up a free MongoDB Atlas cluster — the recommended starting point for associates new to MongoDB. It's meant as a companion to Topic 4: MongoDB Setup in the training notes.
+This guide walks through setting up a free MongoDB Atlas cluster — the recommended starting point for associates new to MongoDB.
 
 > **Official documentation:** [Get Started with Atlas — MongoDB Docs](https://www.mongodb.com/docs/get-started/)
 > Additional reference: [Create a Cluster — MongoDB Atlas Docs](https://www.mongodb.com/docs/atlas/tutorial/create-new-cluster/)
@@ -37,7 +37,7 @@ Note: You will need to install one of these two tools above before you can verif
 
 Atlas requires a database-specific username and password, separate from your Atlas account login.
 
-1. When prompted (or under **Database & Netword Access** in the left sidebar), choose **Username and Password** as the authentication method.
+1. When prompted (or under **Database & Network Access** in the left sidebar), choose **Username and Password** as the authentication method.
 2. Enter a username and a secure password. **Save these somewhere safe** — you'll need them for your connection string.
 3. Click **Create User**.
 
