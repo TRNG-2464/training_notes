@@ -1,0 +1,37 @@
+<!-- THIS FILE SHOULD BE PLACED IN src/main/resources IN YOUR PROJECT DIRECTORY -->
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%-4relative %d{HH:mm:ss.SSS} [%thread] %-5level %logger{5}.%M - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <property name="LOG_FILE" value="logs/LogFile" />
+    <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FILE}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- since my fileNamePattern includes minutes (mm), this will roll every minute
+                Most applications use a daily rolling period or greater
+                e.g. <fileNamePattern>${file-path}.d%{yyyy-MM-dd}</fileNamePattern>
+            -->
+            <fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd-HH-mm}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>2GB</totalSizeCap>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%d{yyyy-MMM-dd | HH:mm:ss.SSS} [%thread] %-5level %logger{50}.%M - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.revature.logging" level="INFO">
+        <appender-ref ref="STDOUT" />
+    </logger>
+    <logger name="com.revature.logging" level="WARN">
+        <appender-ref ref="ROLLING" />
+    </logger>
+
+    <root level="debug">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>
