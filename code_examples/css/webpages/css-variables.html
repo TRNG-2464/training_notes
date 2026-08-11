@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Variables Example</title>
+    <style>
+        /*
+          CSS Variables (custom properties) let you define reusable values
+          -- colors, spacing, fonts -- in one place, and reference them
+          throughout your stylesheet. This makes large-scale changes (like
+          a rebrand or dark mode) much easier to manage.
+        */
+
+        :root {
+            /* Defining variables on :root makes them available globally */
+            --color-primary: #2563eb;
+            --color-primary-hover: #0ec03b;
+            --color-text: #1f2937;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --font-base: 16px;
+        }
+
+        body {
+            font-family: sans-serif;
+            color: var(--color-text);
+            padding: var(--spacing-lg);
+        }
+
+        .button {
+            background-color: var(--color-primary);
+            color: white;
+            padding: var(--spacing-sm) var(--spacing-md);
+            font-size: var(--font-base);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            /* Best practice: reuse variables instead of hardcoding a new value,
+               so future color changes only need to happen in one place */
+            background-color: var(--color-primary-hover);
+        }
+
+        /* Variables can also be overridden in a specific scope,
+           which is useful for theming (e.g., dark mode) */
+        .dark-theme {
+            /* These custom properties are scoped (and therefore only available)
+                 within this ''.dark-theme' selector */
+            --color-primary: #3b82f6;
+            --color-text: #f9fafb;
+            background-color: #111827;
+            padding: var(--spacing-lg);
+            border-radius: 6px;
+            margin-top: var(--spacing-lg);
+        }
+    </style>
+</head>
+<body>
+    <h2>Light Theme (default)</h2>
+    <button class="button">Clickable Button</button>
+
+    <div class="dark-theme">
+        <h2>Dark Theme (variables overridden)</h2>
+        <button class="button">Clickable Button</button>
+    </div>
+</body>
+</html>

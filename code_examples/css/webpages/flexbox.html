@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexbox Example</title>
+    <style>
+        /*
+          Flexbox is a one-dimensional layout system, ideal for laying out
+          items in a row OR a column (not both at once -- that's what Grid is for).
+        */
+        body {
+            font-family: sans-serif;
+            margin: 0;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between; /* spreads items across the main axis */
+            align-items: center;            /* centers items on the cross axis */
+            padding: 12px 24px;
+            background-color: lightskyblue;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px; /* modern, clean way to space flex children -- avoids margin hacks */
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .card-list {
+            display: flex;
+            flex-wrap: wrap; /* allows items to wrap onto new lines instead of overflowing */
+            gap: 16px;
+            padding: 24px;
+        }
+
+        .card {
+            flex: 1 1 200px;
+            /* flex-grow: 1   -> card can grow to fill extra space
+               flex-shrink: 1 -> card can shrink if space is tight
+               flex-basis: 200px -> card starts at a preferred width of 200px */
+            box-sizing: border-box;
+            padding: 16px;
+            background-color: lightgreen;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        /*
+          Note: Using fixed widths with flexbox will NOT wrap or resize
+          the element responsively
+
+          // Incorrect (non-responsible design):
+          .card { 
+            width: 200px; 
+          }
+
+          // Correct (responsible design):
+          .card {
+            flex: 1 1 200px;
+          }
+        */
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <strong>Logo</strong>
+        <ul class="nav-links">
+            <li>Home</li>
+            <li>About</li>
+            <li>Contact</li>
+        </ul>
+    </nav>
+
+    <div class="card-list">
+        <div class="card">Card 1</div>
+        <div class="card">Card 2</div>
+        <div class="card">Card 3</div>
+        <div class="card">Card 4</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Grid Example</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+        }
+
+        /*
+          CSS Grid is a two-dimensional layout system -- ideal when you need
+          to control both rows AND columns at the same time.
+        */
+        .page-layout {
+            display: grid;
+            grid-template-columns: 200px 1fr; /* fixed sidebar, flexible main content */
+            grid-template-rows: 60px 1fr 40px; /* header, content, footer */
+            grid-template-areas:
+                "header header"
+                "sidebar main"
+                "footer footer";
+            height: 100vh;
+            gap: 8px;
+        }
+
+        .header  { grid-area: header;  background-color: lightskyblue; }
+        .sidebar { grid-area: sidebar; background-color: lightgreen; }
+        .main    { grid-area: main;    background-color: whitesmoke; }
+        .footer  { grid-area: footer;  background-color: lightskyblue; }
+
+        .header, .sidebar, .main, .footer {
+            padding: 12px;
+            box-sizing: border-box;
+        }
+
+        /* A responsive card grid -- auto-fills as many columns as will fit,
+           each at least 220px wide, without needing manual breakpoints */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 16px;
+        }
+
+        .card {
+            padding: 16px;
+            background-color: lightskyblue;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        /*
+          Avoid using Grid for simple one-dimensional layouts (like a single row
+          of nav links). Flexbox is usually simpler and more appropriate
+          when you only need to control one axis.
+        */
+    </style>
+</head>
+<body>
+    <div class="page-layout">
+        <div class="header">Header</div>
+        <div class="sidebar">Sidebar</div>
+        <div class="main">
+            <p>Main content area</p>
+            <div class="card-grid">
+                <div class="card">Card 1</div>
+                <div class="card">Card 2</div>
+                <div class="card">Card 3</div>
+                <div class="card">Card 4</div>
+                <div class="card">Card 5</div>
+            </div>
+        </div>
+        <div class="footer">Footer</div>
+    </div>
+</body>
+</html>

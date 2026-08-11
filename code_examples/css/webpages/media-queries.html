@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Queries Example</title>
+    <style>
+        /*
+          Media queries let you apply different CSS rules based on
+          characteristics of the device/viewport, most commonly screen width.
+          This is the foundation of responsive design.
+        */
+
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        /* Base styles - written "mobile-first," applying to all screen sizes by default */
+        .container {
+            display: flex;
+            flex-direction: column;
+            padding: 16px;
+        }
+
+        .card {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 16px;
+            margin-bottom: 16px;
+            background-color: lightskyblue;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        /* Best practice: use min-width breakpoints and build UP from mobile,
+           rather than max-width breakpoints building DOWN from desktop.
+           This tends to produce simpler, more predictable CSS. */
+        @media (min-width: 600px) {
+            .container {
+                flex-direction: row;
+                gap: 16px;
+            }
+
+            .card {
+                width: 48%;
+                margin-bottom: 0;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .card {
+                width: 30%;
+                background-color: lightgreen;
+            }
+        }
+
+        /*
+          Common mistake (shown for educational purposes. Make sure
+          you avoid this):
+          
+          Writing desktop-first styles and overriding with max-width queries
+          for every smaller screen size. This often leads to more overrides
+          and messier CSS as you add more breakpoints.
+
+          @media (max-width: 1023px) { .card { width: 48%; } }
+          @media (max-width: 599px)  { .card { width: 100%; } }
+        */
+    </style>
+</head>
+<body>
+    <h2>Resize the browser window to see the layout change</h2>
+
+    <div class="container">
+        <div class="card">Card 1</div>
+        <div class="card">Card 2</div>
+        <div class="card">Card 3</div>
+    </div>
+</body>
+</html>
