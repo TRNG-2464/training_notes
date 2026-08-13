@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Event Propagation</title>
+    <style>
+        #inner,
+        #middle,
+        #outer {
+            text-align: center;
+            padding: 10px 10px 75px 10px;
+            font-weight: bold;
+            font-size: 30pt;
+        }
+
+        #inner {
+            background-color: cornsilk;
+        }
+
+        #middle {
+            background-color: crimson;
+        }
+
+        #outer {
+            background-color: darkgreen;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="outer">
+        <h2>OUTER</h2>
+
+        <div id="middle">
+            <h2>MIDDLE</h2>
+
+            <div id="inner">
+                <h2>INNER</h2>
+            </div>
+
+        </div>
+        
+    </div>
+</body>
+<script>
+    /*
+        Event Propagation describes the order in which event listeners are triggered when an event fires on
+        a nested element
+
+        Propagation happens in 3 phases: capture, target and bubble.
+
+        If both Bubble and Capture event listeners are added to the appropriate elements and you click on
+        the inner div, it will log:
+            OUTER - CAPTURE     : capture phase, travelling down
+            MIDDLE - CAPTURE    : capture phase, continuing down
+            INNER - CAPTURE     : target element, capture listener
+            INNER - BUBBLE      : target element, bubble listener
+            MIDDLE - BUBBLE     : bubble phase, travelling up
+            OUTER - BUBBLE      : bubble phase, continuing up
+    */
+
+    // We will use these booleans to drive whether we want events to bubble/capture
+    let bubble = false;
+    let capture = true;
+
+    // bubble - Clicking the button with capture will log: inner > middle > outer (depending on which div is clicked)
+    document.getElementById("outer").addEventListener("click", function() {
+        console.log("OUTER - BUBBLE");
+    }, bubble);
+    document.getElementById("middle").addEventListener("click", function() {
+        console.log("MIDDLE - BUBBLE");
+    }, bubble);
+    document.getElementById("inner").addEventListener("click", function() {
+        console.log("INNER - BUBBLE");
+    }, bubble);
+
+    // CAPTURE - Clicking the button with capture will log: outer > middle > inner (depending on which div is clicked)
+    document.getElementById("outer").addEventListener("click", function() {
+        console.log("OUTER - CAPTURE");
+    }, capture);
+    document.getElementById("middle").addEventListener("click", function() {
+        console.log("MIDDLE - CAPTURE");
+    }, capture);
+    document.getElementById("inner").addEventListener("click", function(e) {
+        console.log("INNER - CAPTURE");
+        e.stopPropagation();
+
+    }, capture);
+</script>
+</html>

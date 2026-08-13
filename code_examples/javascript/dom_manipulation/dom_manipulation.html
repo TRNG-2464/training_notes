@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DOM Manipulation</title>
+</head>
+<style>
+    #blue {
+        color:blue;
+    }
+</style>
+<body>
+	<a id="google-link" href="https://www.google.com">Click here to go to Google</a>
+
+    <!-- The duplication of the ID value here is for demonstration purposes - you should only
+     have a single instance of an ID value across your webpage -->
+    <p id="Example">This is a paragraph. It has an Id of 'Example'</p>
+    <p id="Example">This is a paragraph. It has an Id of 'Example'</p>
+    <p id="Example">This is a paragraph. It has an Id of 'Example'</p>
+
+    <p class="intro">Intro Paragraph #1</p>
+    <p class="intro">Intro Paragraph #2</p>
+
+    <p class="list-item">This is a paragraph. It has a Class of 'list-item'</p>
+    <p class="list-item">This is a paragraph. It has a Class of 'list-item'</p>
+    <p class="list-item">This is a paragraph. It has a Class of 'list-item'</p>
+
+    <ol>
+        <li>Item one</li>
+        <li>Item two</li>
+        <li>Item three</li>
+    </ol>
+</body>
+
+<!--
+    DOM Manipulation is the process of referencing elements on a connected HTML page by 
+    treating the webpage as a collection of objects (Recall that DOM stands for: Document 
+    OBJECT model)
+        -Document : Reference to the HTML document
+        -Object : A construct that holds only multiple values using key-value pairs
+        -Model : A way to view/represent information
+
+    The easiest way to reference an element is to add the ID attribute to an element and 
+    reference that value.
+
+    Keep in mind that Id's should be unique to a single element...If multiple elements 
+    have the same ID, then the function will only reference the first element found with 
+    that particular ID.
+
+    ***One thing to keep in mind If we use DOM Manipulation, we should put our Script 
+    reference below our Body element. This is because our webpage loaded from top to bottom, 
+    and we want to ensure that all elements have loaded before we try to reference them. As 
+    such, the script element should come near the bottom of the html file.***
+
+    Alternatively, you can use the attribute 'defer' in the script element, so long as the 
+    script file is referenced externally using the src attribute.
+-->
+<script>
+    console.log(document); // This references the entire webpage as an object
+    console.log(document.title);    // The text inside the <title> tag
+    console.log(document.body);     // The <body> element as a JavaScript object
+    console.log(document.head);     // The <head> element
+
+    // The DOM tree reflects the nesting of HTML — each element knows its relatives
+    console.log(document.body.children);       // Direct child elements of <body>
+    console.log(document.body.parentElement);  // The <html> element — body's parent
+
+    /* 
+        'getElementById' is a built-in function, referenced from the 'document' (reference 
+        to our webpage) that will find an element based on the value of it's id attribute.
+
+        Keep in mind, it only finds the first element with this id.
+    */
+    let para = document.getElementById("Example");
+    console.log(para); // This references the specific HTML element that we found above
+    console.log(typeof para); // This will show that the element is an object
+
+    /* 
+        innerHTML is a property of all HTML elements. It reference information between the 
+        opening and cloding tags of an HTML element
+
+        innerHTML can be used to add HTML code to an element
+    */
+    console.log(para.innerHTML);
+    para.innerHTML = "<div>Changed</div>"; // we will see this change on our HTML document as well
+    console.log(para.innerHTML);
+	
+	/*
+		Attributes can also be changed using the setAttribute function
+	*/
+	let anchor = document.getElementById("google-link");
+	anchor.setAttribute("style", "background-color: yellow");
+	
+    /*
+        'getElementsByClassName' will return an array with all of the elements that have a 
+        particular class
+    */
+    let elems = document.getElementsByClassName("list-item");
+    console.log(elems);
+    for (let i = 0; i < elems.length; i++) {
+        // textContent changes just the text in the element (treating it like a string)
+        elems[i].textContent = "New Value. Element #" + i;
+    }
+
+    // Alternatively: document.querySelectorAll(".list-item") will return a NodeList of all 
+    // elements with the class of 'list-item'
+
+    /*
+        Query Selectors
+    */
+    let firstIntro = document.querySelector(".intro"); // returns the first element with 
+    // the class of 'intro'
+
+
+    // querySelector & querySelectorAll get static references rather than live references
+    // getElementById / ElementsByClassName/tagName etc... references live HTML collections
+    const liveCollection = document.getElementsByClassName("intro");   // Live
+    const staticList = document.querySelectorAll(".intro");            // Static
+
+    console.log(liveCollection.length); // 2
+    console.log(staticList.length);     // 2
+
+    // Now a new element is added to the DOM
+    const newPara = document.createElement("p");
+    newPara.className = "intro";
+
+    newPara.textContent = "This is my new Text Content";
+    newPara.id = "blue";
+
+    // The element isn't added to the DOM until we append it to an existing element
+    document.body.appendChild(newPara);
+
+    console.log(liveCollection.length); // 3 live collection updated automatically
+    console.log(staticList.length);     // 2 static snapshot did not change
+
+
+
+
+    /*
+
+    These notes relate to the keyword 'final' in Java and 'const' in JavaScript
+        final Dog scooby = new Dog("Scooby", "Great Dane");
+        scooby.name = "New Name";   // This works
+
+        scooby = new Dog();
+
+        const number = 5;
+        number = 100;   // cannot change the pointer in memory
+
+        const obj = {
+            name:"Joe",
+            age:15
+        };
+
+        obj.name = "New Name";  // This doesn't change the pointer in memory
+        obj = new Object(); // This changes the pointer in memory - not allowed!
+    */
+</script>
+</html>

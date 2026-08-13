@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Events</title>
+</head>
+
+<body>
+    <h2>To Access Developer Tools, Press F12, or right-click and select "inspect"/"inspect element" navigate to the
+        Console tab.</h2>
+
+    <!-- This button is used to show how to link a function to an element directly -->
+     <!-- when using this binding, the function that is called will not reference the nested element using 'this'
+        Rather, 'this' will reference the Global object (it references global scope, not the object receiving the event) -->
+    <button onclick="onClickAttribute()">On Click Attribute!</button>
+
+    <!-- This button is used to reference as an object and adding a property in our script -->
+    <button id="objectRef">Object Reference Event!</button>
+
+    <!-- This button utilizes the addEventListener function in Javascript
+        This is the standard way of using events and linking scripts to HTML elements in Javascript -->
+    <button id="evtButtonRef">Add Event Handler Event!</button>
+
+
+    <!-- Simple HTML form to showcase Events with Forms -->
+    <form id="signup-form">
+        <input type="text" id="username" placeholder="Username" />
+        <span id="char-count">0 / 20</span>
+        <br />
+        <input type="email" id="email" placeholder="Email" />
+        <br />
+        <label>Agree to Terms and Conditions?</label>
+        <input type="checkbox" id="agree" />
+        
+        <button type="submit">Sign Up</button>
+    </form>
+</body>
+
+<script>
+    /*
+        Note, this script is included directly onto this html page just to show the relationship 
+        between the buttons and functions more easily. This can be done with external files as well.
+    */
+
+    /* 
+        This is the function linked directly on the button above
+        Note: this method does NOT use the Javascript Event system
+    */
+    function onClickAttribute() {
+        console.log("This used the OnClick Attribute Event!");
+        console.log(this);
+    }
+
+    /* 
+        The code below this function references a button on our HTML page and applies this 
+        function to the onclick attribute.
+
+        Note that this only allows you to apply a single function to a particular element.
+    */
+    function onClickFunction() {
+        console.log("This used the onClick as an Object Reference!");
+        console.log(this);
+    }
+    let ref = document.getElementById("objectRef");
+    ref.onclick = onClickFunction;
+
+
+    /* 
+        The code below this function references a button on our HTML page and adds this function 
+        as an event when the button is clicked.
+    */
+    function objEventHandlerButton(evt) {
+        console.log("This used the add event handler function!");
+        console.log(this);
+        console.log(evt); // JavaScript passes an EventObject to your handler function as it's first argument, when fired!
+    }
+    let evt = document.getElementById("evtButtonRef");
+    evt.addEventListener("click", objEventHandlerButton);
+
+
+    /* 
+        When we use the addEventListener function, we can have more than one function linked to a 
+        particular HTML element. Giving us more flexibility.
+    */
+    evt.addEventListener("click", onClickFunction); // Add another event listener
+    evt.removeEventListener("click", onClickFunction);  // remove an added event listener
+
+
+
+    /*
+        The following showcase 'Form Events'
+    */
+    const form = document.getElementById("signup-form");
+    const usernameInput = document.getElementById("username");
+    const emailInput = document.getElementById("email");
+    const agreeCheckbox = document.getElementById("agree");
+    const charCount = document.getElementById("char-count");
+
+    // ---- submit intercept form submission ----
+    form.addEventListener("submit", (event) => {
+        event.preventDefault(); // Stops the page from reloading essential for JS-handled forms
+
+        // Reading field values at the time of submission
+        const username = usernameInput.value;
+        const email = emailInput.value;
+        const agreed = agreeCheckbox.checked;
+
+        console.log(`Username: ${username}`);
+        console.log(`Email: ${email}`);
+        console.log(`Agreed to terms: ${agreed}`);
+
+        // Basic validation before proceeding
+        if (!username || !email) {
+            alert("Please fill in all required fields");
+            return; // Stop here do not proceed with submission
+        }
+
+        if (!agreed) {
+            alert("Please agree to the terms before signing up");
+            return;
+        }
+
+        console.log("Form is valid submitting data to server...");
+        // fetch() or other async logic would go here
+    });
+
+    // input fires on every keystroke, ideal for real-time feedback
+    usernameInput.addEventListener("input", (event) => {
+        // How much text is in this field
+        const currentLength = event.target.value.length;
+        charCount.textContent = `${currentLength} / 20`;
+
+        // Real-time validation flag if over the character limit
+        if (currentLength > 20) {
+            charCount.style.color = "red";
+        } else {
+            charCount.style.color = "black";
+        }
+    });
+
+    // change fires when value changes AND focus leaves the field
+    // Better suited for post-edit validation or transformations
+    emailInput.addEventListener("change", (event) => {
+        const email = event.target.value;
+        if (!email.includes("@")) {
+            alert("Please enter a valid email address - it must include an '@'");
+        } else {
+            console.log("Email looks good!");
+        }
+    });
+
+    // change fires immediately for checkboxes no focus loss needed
+    agreeCheckbox.addEventListener("change", (event) => {
+        console.log(`Terms agreed: ${event.target.checked}`); // true or false
+    });
+
+    // focus fires when the user enters a field
+    usernameInput.addEventListener("focus", () => {
+        console.log("Username field is now active");
+        usernameInput.style.outline = "2px solid blue"; // Visual indicator for active field
+    });
+
+    // blur fires when the user leaves a field
+    // Ideal for showing validation messages after the user has finished with a field
+    usernameInput.addEventListener("blur", (event) => {
+        usernameInput.style.outline = ""; // Remove the active indicator
+
+        const value = event.target.value;
+        if (value.length < 3) {
+            alert("Username must be at least 3 characters");
+        } else {
+            console.log("Username looks good!");
+        }
+    });
+</script>
+</html>
