@@ -1,0 +1,1 @@
+import "@testing-library/jest-dom/vitest";  // This import allows for the automatic import & use of jest-dom matchers with vitest

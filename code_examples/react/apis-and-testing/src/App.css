@@ -1,0 +1,195 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: #f4f6f9;
+  color: #1a1a2e;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 16px;
+}
+
+/* ---- Layout ---- */
+.card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  padding: 36px;
+  width: 100%;
+  max-width: 640px;
+}
+
+/* ---- Header ---- */
+header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+header h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  letter-spacing: -0.3px;
+}
+
+header p {
+  margin-top: 6px;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+/* ---- Form ---- */
+.form-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1.5px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: #1a1a2e;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+input[type="text"]:focus  { border-color: #6366f1; }
+input[type="text"]::placeholder { color: #9ca3af; }
+
+button {
+  padding: 10px 20px;
+  background: #6366f1;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+  white-space: nowrap;
+}
+
+button:hover   { background: #4f46e5; }
+button:active  { background: #4338ca; }
+button:disabled {
+  background: #a5b4fc;
+  cursor: not-allowed;
+}
+
+/* ---- Status messages ---- */
+.status {
+  font-size: 0.88rem;
+  min-height: 20px;
+  margin-bottom: 16px;
+  padding: 0 2px;
+}
+
+.status.loading { color: #6366f1; }
+.status.error   { color: #ef4444; }
+.status.success { color: #10b981; }
+
+/* ---- Pokémon result panel ---- */
+.result-panel {
+  display: none;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 24px;
+  padding: 16px;
+  background: #f8f8ff;
+  border-radius: 10px;
+  border: 1px solid #e0e7ff;
+}
+
+.result-panel.visible { display: flex; }
+
+/* Sprite image loaded from Blob */
+#pokemon-sprite {
+  width: 96px;
+  height: 96px;
+  image-rendering: pixelated; /* Keeps the sprite crisp at larger sizes */
+  flex-shrink: 0;
+}
+
+.pokemon-name {
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-transform: capitalize;
+  color: #1a1a2e;
+}
+
+.type-badges { margin-top: 6px; }
+
+/* ---- Type badge ---- */
+.type-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  margin-right: 4px;
+  color: #fff;
+  background: #6b7280;
+}
+
+.type-fire     { background: #f97316; }
+.type-water    { background: #3b82f6; }
+.type-grass    { background: #22c55e; }
+.type-electric { background: #eab308; color: #1a1a2e; }
+.type-psychic  { background: #ec4899; }
+.type-ice      { background: #67e8f9; color: #1a1a2e; }
+.type-dragon   { background: #7c3aed; }
+.type-dark     { background: #374151; }
+.type-fairy    { background: #f9a8d4; color: #1a1a2e; }
+.type-normal   { background: #9ca3af; }
+.type-fighting { background: #b45309; }
+.type-flying   { background: #93c5fd; color: #1a1a2e; }
+.type-poison   { background: #a855f7; }
+.type-ground   { background: #d97706; }
+.type-rock     { background: #78716c; }
+.type-bug      { background: #84cc16; color: #1a1a2e; }
+.type-ghost    { background: #6d28d9; }
+.type-steel    { background: #94a3b8; }
+
+/* ---- Results Table ---- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+thead tr { background: #f0f0ff; }
+
+th {
+  text-align: left;
+  padding: 10px 14px;
+  font-weight: 600;
+  color: #4338ca;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  border-bottom: 2px solid #e0e7ff;
+}
+
+td {
+  padding: 10px 14px;
+  border-bottom: 1px solid #f1f1f1;
+  color: #374151;
+  text-transform: capitalize;
+}
+
+tr:last-child td { border-bottom: none; }
+tr:hover td      { background: #fafafa; }
+
+/* ---- Empty state ---- */
+.empty-state {
+  text-align: center;
+  padding: 32px 16px;
+  color: #9ca3af;
+  font-size: 0.9rem;
+}
