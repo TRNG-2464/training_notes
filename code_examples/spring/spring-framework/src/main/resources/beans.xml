@@ -1,0 +1,23 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- the 'id' of the bean should match the string passed to the
+        'getBean' method called in our App -->
+    <bean id="XmlBean1" class="com.revature.beans.config.XmlBean">
+        <!-- Additional Configuration will go here... -->
+        <constructor-arg index="0" value="1000"/>
+        <constructor-arg index="1" value="First Bean"/>
+        <constructor-arg index="2" value="First XML-Configured Bean"/>
+    </bean>
+
+    <!-- using 'property' we are calling the setting method for the properties on our
+            bean class instead of the constructor (above) -->
+    <bean id="XmlBean2" class="com.revature.beans.config.XmlBean">
+        <!-- Additional Configuration will go here... -->
+        <property name="id" value="1001" />
+        <property name="name" value="Mr Bean" />
+        <property name="data" value="Second XML-Configured Bean | Using property names instead of constructor args" />
+    </bean>
+</beans>
