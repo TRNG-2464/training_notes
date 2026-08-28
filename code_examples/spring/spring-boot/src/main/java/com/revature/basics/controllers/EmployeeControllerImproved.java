@@ -17,16 +17,9 @@ public class EmployeeControllerImproved {
         this.employeeRepository = employeeRepository;
     }
 
-    /*
-     * Here, the Builder Pattern is used to create a Response Entity
-     * with an OK status if the record is found in our database
-     * otherwise, we return a notFound() response (404)
-     */
-    @GetMapping("/{id}")
-    public ResponseEntity<Employee> getEmployeeById(@PathVariable Integer id) {
-        return employeeRepository.findById(id)
-                .map(ResponseEntity::ok)    // if found, return 200 OK with Employee record data
-                .orElse(ResponseEntity.notFound().build()); // otherwise return 404 if not found
+    @GetMapping
+    public List<Employee> getEmployeeData() {
+        return employeeRepository.findAll();
     }
 
     // GET http://localhost:8080/search?title=Value | http://localhost:8080/search
@@ -55,6 +48,18 @@ public class EmployeeControllerImproved {
                 .stream()
                 .limit(limit)
                 .toList();
+    }
+
+    /*
+     * Here, the Builder Pattern is used to create a Response Entity
+     * with an OK status if the record is found in our database
+     * otherwise, we return a notFound() response (404)
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable Integer id) {
+        return employeeRepository.findById(id)
+                .map(ResponseEntity::ok)    // if found, return 200 OK with Employee record data
+                .orElse(ResponseEntity.notFound().build()); // otherwise return 404 if not found
     }
 
     // POST mapping which returns 201 (Created) instead of a default 200
@@ -92,4 +97,7 @@ public class EmployeeControllerImproved {
         employeeRepository.deleteById(id);
         return ResponseEntity.noContent().build();  // returns 204 - empty body
     }
+
+
+
 }

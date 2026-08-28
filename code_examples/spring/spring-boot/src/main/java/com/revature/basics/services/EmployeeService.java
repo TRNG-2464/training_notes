@@ -23,6 +23,8 @@ public class EmployeeService {
         this.employeeLoginRepository = employeeLoginRepository;
     }
 
+    // Some of our Service methods are simple - just calling an equivalent method
+    // in our Repository Layer
     public List<Employee> getAllEmployees() {
         return employeeRepository.findAll();
     }
@@ -32,6 +34,7 @@ public class EmployeeService {
                 .orElseThrow(() -> new EmployeeNotFoundException(id));
     }
 
+    // Whereas others may call specific methods that we create in our Repository
     public List<Employee> searchByTitle(String title) {
         return employeeRepository.findByEmpTitleIgnoreCase(title);
     }
@@ -43,6 +46,7 @@ public class EmployeeService {
         return employeeRepository.save(employee);
     }
 
+    // And others still have more complex logic associated with them...
     /* without @Transactional here, if the employeeLoginRepository.save() fails
      * AFTER the employeeRepository.save() already succeeded, the database is
      * left in a broken, half-finished state. An employee exists with no way

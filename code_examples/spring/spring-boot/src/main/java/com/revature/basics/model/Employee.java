@@ -11,6 +11,9 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 
+// The @Entity annotation tells Spring Data JPA
+// That this class represents a record in our database
+// i.e. This model matches the expected table schema (columns)
 @Entity
 @Table(name = "employees", schema="examples")
 @Getter
@@ -20,8 +23,8 @@ import java.math.BigDecimal;
 public class Employee {
 
     @Id
-    @Column(name = "emp_id")
-    private Integer empId;
+    @Column(name = "emp_id")    // This @Column annotation is OPTIONAL if your Entity
+    private Integer empId;      // class uses the exact same name as your DB table schema
 
     @Column(name = "emp_name")
     private String empName;

@@ -19,13 +19,14 @@ public class PaycheckService {
     private final PaycheckRepository paycheckRepository;
     private final Counter paychecksCreatedCounter;
 
-
     public PaycheckService(PaycheckRepository paycheckRepository, MeterRegistry meterRegistry) {
         this.paycheckRepository = paycheckRepository;
 
         /*
          * This Example showcases how we can create a Counter metric for
-         * Actuator.
+         * Actuator. - Note, we could have created this method in the dedicated
+         * 'actuator.paychecks.PaycheckMetrics' class and exposed this Counter
+         * for you here, but I have just included it here for simplicity.
          */
         this.paychecksCreatedCounter = Counter.builder("paychecks.created")
                 .description("Total number of paychecks created via the API")
@@ -61,6 +62,8 @@ public class PaycheckService {
         return paycheckRepository.findByGrossPayGreaterThan(minGrossPay);
     }
 
+    // This service method performs more than just a call to our Repository
+    // It also makes an update to our Actuator's health metrics
     public Paycheck createPaycheck(Paycheck paycheck) {
         Paycheck saved = paycheckRepository.save(paycheck);
 

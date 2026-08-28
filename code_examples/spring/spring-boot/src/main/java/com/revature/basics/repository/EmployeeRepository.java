@@ -16,7 +16,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     List<Employee> findByEmpTitleIgnoreCase(String title);
 
 
-
+    // The following using JPQL; however, I could have easily replaced this with
+    // a PostgreSql query like this: "Select * From examples.employees WHERE emp_salary > ?1")
     @Query("SELECT e FROM Employee e WHERE e.empSalary > :minSalary")
     List<Employee> findHighEarners(@Param("minSalary") BigDecimal minSalary);
 }
