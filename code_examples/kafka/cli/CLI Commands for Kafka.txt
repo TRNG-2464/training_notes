@@ -1,0 +1,24 @@
+CLI Commands for Kafka:
+# TURN ON DOCKER CONTAINERS
+docker compose up -d
+
+# SEE THE NAME OF DOCKER IMAGES:
+docker ps
+
+# CREATE TOPIC
+docker exec -it kafka-cli /opt/kafka/bin/kafka-topics.sh --create --topic <TOPIC-NAME> --bootstrap-server localhost:<PORT> --partitions 1 --replication-factor 1
+
+# LIST TOPICS
+docker exec -it kafka-cli /opt/kafka/bin/kafka-topics.sh --list --bootstrap-server localhost:<PORT>
+
+# DESCRIBE TOPICS
+docker exec -it kafka-cli /opt/kafka/bin/kafka-topics.sh --describe --topic <TOPIC-NAME> --bootstrap-server localhost:<PORT>
+
+# DELETE TOPIC
+docker exec -it kafka-cli /opt/kafka/bin/kafka-topics.sh --DELETE --topic <TOPIC-NAME> --bootstrap-server localhost:<PORT>
+
+# PRODUCE MESSAGES
+docker exec -it kafka-cli /opt/kafka/bin/kafka-console-producer.sh --topic <TOPIC-NAME> --bootstrap-server localhost:<PORT>
+
+# CONSUME MESSAGES
+docker exec -it kafka-cli /opt/kafka/bin/kafka-console-consumer.sh --topic <TOPIC-NAME> --bootstrap-server localhost:<PORT> --from-beginning
